@@ -1,6 +1,15 @@
 var Book = require('../models/book')
 
 class bookController {
+    static getEditPage(req,res) {
+        Book.findOne({_id: req.params.id})
+        .then((book,err) => {
+            if(err) return res.send(err)
+
+            res.render('editBook', {title: 'Edit Books', book:book})
+        })
+    }
+
     static get(req,res) {
         Book.find({})
         .then((book,err) => {
@@ -8,10 +17,6 @@ class bookController {
             res.send(err)
           }
           res.render('books', {title: 'Books', books:book})
-        //   res.send({
-        //       message: 'Book list has been loaded',
-        //       list: book
-        //   })
         })
     }
 
@@ -29,33 +34,35 @@ class bookController {
             if(err) {
               res.send(err)
             }
-            // console.log(result)
-            res.send({
-                message: 'Book has been added',
-                added: result
-            })
+            res.redirect('/books')
           })
     }
 
     static update(req,res) {
-        Book.findOneAndUpdate({_id: req.params.id},{title: 'Dragon Pinch'}, (user, err) => {
-            if(err) return console.log(err)
-            
-            res.send({
-                message: 'user has been edited',
-                user: user
-            })
+        Book.findOneAndUpdate({_id: req.params.id},{
+            isbn: req.body.isbn,
+            title: req.body.title,
+            author: req.body.author,
+            category: req.body.category,
+            stock: req.body.stock
+        })
+        .then((book,err) => {
+            if(err) return res.send(err)
+
+            res.redirect('/books')
         })
     }
 
     static delete(req,res) {
-        Book.findOneAndRemove({_id: req.params.id}, (user,err) => {
-            if(err) return console.log(err)
-    
-            res.send({
-                message: 'user has been deleted',
-                user: user
-            })
+        // Book.findOne({_id: req.params.id})
+        // .then((book,err) => {
+        //     res.send(book)
+        // })
+        Book.findOneAndRemove({_id: req.params.id})
+        .then((book,err) => {
+            if(err) return res.send(err)
+
+            res.redirect('/books')
         })
     }
 }

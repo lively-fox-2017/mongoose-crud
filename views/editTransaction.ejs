@@ -18,25 +18,22 @@
             <th>Fine</th>
             <th>Booklist</th>
         </tr>
-        <%transaction.forEach(d => {%>
             <tr>
-                <td><%=d.id%></td>
-                <td><%=d.member.name%></td>
-                <td><%=d.days%></td>
-                <td><%=d.out_date%></td>
-                <td><%=d.due_date%></td>
-                <td><%=d.in_date%></td>
-                <td><%=d.fine%></td>
+                <td><%=transaction.id%></td>
+                <td><%=transaction.member.name%></td>
+                <td><%=transaction.days%></td>
+                <td><%=transaction.out_date%></td>
+                <td><%=transaction.due_date%></td>
+                <td><%=transaction.in_date%></td>
+                <td><%=transaction.fine%></td>
                 <td>
                     <ul>
-                        <%d.booklist.forEach(b => {%>
+                        <%transaction.booklist.forEach(b => {%>
                         <li><%=b.title%></li>        
                         <%})%>
                     </ul>
                 </td>
-                <td><a href='/collections/edit/<%=d.id%>'>Edit</a></td>
             </tr>
-        <%})%>
     </table>
     <form action='/collections' method='post'>
         <select name='member'>

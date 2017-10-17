@@ -9,6 +9,8 @@ router.get('/', collectionCtrl.get);
 
 router.post('/', collectionCtrl.post)
 
+router.get('/edit/:id', collectionCtrl.getEditPage)
+
 router.put('/:id', collectionCtrl.update)
 
 router.delete('/:id',collectionCtrl.delete)
