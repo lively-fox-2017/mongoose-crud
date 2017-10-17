@@ -18,9 +18,9 @@ class Transaction {
     let newTransaction = Transaksi({
       "member": req.body.member,
       "days":req.body.days,
-      "out_date":req.body.out_date,
-      "due_date":req.body.due_date,
-      "in_date":req.body.in_date,
+      "out_date": new Date(),
+      "due_date": new Date(),
+      "in_date": new Date(),
       "fine":req.body.fine,
       "booklist":req.body.booklist,
     })
@@ -59,9 +59,9 @@ class Transaction {
     Transaksi.findOneAndUpdate({_id: req.params.id}, {
       "member": req.body.member,
       "days":req.body.days,
-      "out_date":req.body.out_date,
-      "due_date":req.body.due_date,
-      "in_date":req.body.in_date,
+      "out_date": new Date(),
+      "due_date": new Date(),
+      "in_date": new Date(),
       "fine":req.body.fine,
       "booklist":req.body.booklist
     })
