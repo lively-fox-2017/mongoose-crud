@@ -21,7 +21,7 @@ transactionSchema.pre('save', function(next){
 
 transactionSchema.pre('findOneAndUpdate', function(next){
   this.findOne({"_id":this._conditions._id}).then((data)=>{
-    // console.log(data);
+    console.log(data);
     var timeDiff = this._update.in_date.getTime() - data.due_date.getTime();
     var diffDays = 0;
     if(timeDiff>0){
@@ -29,7 +29,7 @@ transactionSchema.pre('findOneAndUpdate', function(next){
     }
     this.update({"_id":this._conditions._id}, {
       fine:diffDays*1000
-    }).then((boom)=>{
+    }).then(()=>{
       next()
     })
   })
