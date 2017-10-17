@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Stock</th>
+        </tr>
+        <%books.forEach(d => {%>
+            <tr>
+                <td><%=d.id%></td>
+                <td><%=d.isbn%></td>
+                <td><%=d.title%></td>
+                <td><%=d.author%></td>
+                <td><%=d.category%></td>
+                <td><%=d.stock%></td>
+            </tr>
+        <%})%>
+    </table>
+    <a href='/customers'>Customers</a>
+    <a href='/books'>Books</a>
+    <a href='/collections'>Transactions</a>
+    <a href='/'>Home</a>
+  </body>
+</html>
