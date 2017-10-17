@@ -20,24 +20,34 @@ class Customers {
       "zipcode":req.body.zipcode,
       "phone":req.body.phone
     })
-    newCustomers.save(function(err,customers) {
-      if (err) throw err;
+    newCustomers.save()
+    .then(data=>{
       res.send({
         "Message": "Data Berhasil di Tambah",
-         data: customers
+        "name": req.body.name,
+        "memberid":req.body.memberid,
+        "address":req.body.address,
+        "zipcode":req.body.zipcode,
+        "phone":req.body.phone
       });
+    })
+    .catch(err=>{
+      res.send(err)
     })
   }
 
 
   static deleteCustomers(req,res){
-    Customer.findOneAndRemove({ _id: req.params.id }, function(err, customers) {
-    if (err) throw err;
-    res.send({
-      "message": "Data Berhasil di Delete!",
-      data: customers
+    Customer.findOneAndRemove({ _id: req.params.id })
+    .then(data=>{
+      res.send({
+        "message": "Data Berhasil di Delete!",
+        data: customers
+      })
     })
-    });
+    .catch(err=>{
+      res.send(err)
+    })
   }
 
   static updateCustomers(req,res){
@@ -47,17 +57,19 @@ class Customers {
       "address":req.body.address,
       "zipcode":req.body.zipcode,
       "phone":req.body.phone
-    },
-    function(err, customers) {
-    if (err) throw err;
-    res.send({
-      "message": "Data Berhasil di Update!",
-      "name": req.body.name,
-      "memberid":req.body.memberid,
-      "address":req.body.address,
-      "zipcode":req.body.zipcode,
-      "phone":req.body.phone
     })
+    .then(data=>{
+      res.send({
+        "message": "Data Berhasil di Update!",
+        "name": req.body.name,
+        "memberid":req.body.memberid,
+        "address":req.body.address,
+        "zipcode":req.body.zipcode,
+        "phone":req.body.phone
+      })
+    })
+    .catch(err=>{
+      res.send(err)
     })
   }
 }

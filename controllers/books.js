@@ -3,14 +3,13 @@ const Book = require('../models/books')
 class Books {
 
   static findBooks(req,res){
-    Book.find({}, function(err, books) {
-    if (err) {
+    Book.find({})
+    .then(data=>{
+      res.send(data)
+    })
+    .catch(err=>{
       res.send(err)
-    } else {
-
-      res.send(books)
-    }
-  });
+    })
   }
 
   static createBooks(req,res){
@@ -21,24 +20,34 @@ class Books {
       "category":req.body.category,
       "stock":req.body.stock
     })
-    // console.log('==============',newBooks);
-    newBooks.save(function(err,books) {
-      if (err) throw err;
+      newBooks.save()
+      .then(data=>{
       res.send({
         "Message": "Data Berhasil di Tambah",
-         data: books
-      });
-    })
-  }
+        "isbn": req.body.isbn,
+        "title":req.body.title,
+        "author":req.body.author,
+        "category":req.body.category,
+        "stock":req.body.stock
+       });
+      })
+      .catch(err=>{
+      res.send(err)
+      })
+    }
+
 
   static deleteBooks(req,res){
-    Book.findOneAndRemove({ _id: req.params.id }, function(err, books) {
-    if (err) throw err;
-    res.send({
-      "message": "Data Berhasil di Delete!",
-      books: books
+    Book.findOneAndRemove({_id: req.params.id})
+    .then(data=>{
+      res.send({
+        "message": "Data Berhasil di Delete!",
+        data: req.params.id
+      })
     })
-    });
+    .catch(err=>{
+      res.send(err)
+    })
   }
 
   static updateBooks(req,res){
@@ -48,13 +57,19 @@ class Books {
       "author":req.body.author,
       "category":req.body.category,
       "stock":req.body.stock
-    },
-    function(err, books) {
-    if (err) throw err;
-    res.send({
-      "message": "Data Berhasil di Update!",
-      books: books
     })
+    .then(data=>{
+      res.send({
+        "message": "Data Berhasil di Update!",
+        "isbn": req.body.isbn,
+        "title":req.body.title,
+        "author":req.body.author,
+        "category":req.body.category,
+        "stock":req.body.stock
+      })
+    })
+    .catch(err=>{
+      res.send(err)
     })
   }
 }

@@ -4,10 +4,10 @@ const Schema = mongoose.Schema,
       ObjectId = Schema.ObjectId;
 
 var bookSchema =  new Schema({
-              isbn: {type: String},
-              title: {type: String},
-              author: {type: String},
-              category: {type: String},
+              isbn: String,
+              title: String,
+              author: String,
+              category: String,
               stock: Number
              })
 

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Trans = require('../controllers/transactions')
+const Transaksi = require('../controllers/transactions')
 
 
 /* GET home page. */
-router.get('/', Trans.findTransaction)
-router.post('/', Trans.createTransaction)
-// router.delete('/:id', Book.deleteBooks)
-// router.put('/:id', Book.updateBooks)
+router.get('/', Transaksi.findTransaction)
+router.post('/', Transaksi.createTransaction)
+router.delete('/:id', Transaksi.deleteTransaction)
+router.put('/:id', Transaksi.updateTransaction)
+
 module.exports = router;
