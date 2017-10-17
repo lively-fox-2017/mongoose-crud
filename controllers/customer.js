@@ -1,11 +1,11 @@
 'use strict'
 const models = require('./../models');
 
-class BookController {
+class CustomerController {
 	static findAll(req, res) {
-		models.Book.find().exec()
-		.then(books => {
-			res.status(200).send(books);
+		models.Customer.find().exec()
+		.then(customers => {
+			res.status(200).send(customers);
 		})
 		.catch(err => {
 			res.status(500).send(err);
@@ -13,9 +13,9 @@ class BookController {
 	}
 
 	static findOne(req, res) {
-		models.Book.findById(req.params.id).exec()
-		.then(book => {
-			res.status(200).send(book);
+		models.Customer.findById(req.params.id).exec()
+		.then(customer => {
+			res.status(200).send(customer);
 		})
 		.catch(err => {
 			res.status(500).send(err);
@@ -23,7 +23,7 @@ class BookController {
 	}
 
 	static create(req, res) {
-		models.Book.create(req.body)
+		models.Customer.create(req.body)
 		.then(created => {
 			res.status(200).send(created)
 		})
@@ -33,7 +33,7 @@ class BookController {
 	}
 
 	static update(req, res) {
-		models.Book.updateOne({_id: req.params.id}, req.body).exec()
+		models.Customer.updateOne({_id: req.params.id}, req.body).exec()
 		.then(mResponse => {
 			res.status(200).send(mResponse);
 		})
@@ -43,9 +43,9 @@ class BookController {
 	}
 
 	static delete(req, res) {
-		models.Book.deleteOne({_id: req.params.id})
+		models.Customer.deleteOne({_id: req.params.id})
 		.then(() => {
-			res.status(200).send(`Book with ID ${req.params.id} successfully deleted`);
+			res.status(200).send(`Customer with ID ${req.params.id} successfully deleted`);
 		})
 		.catch(err => {
 			res.status(500).send(err);
@@ -53,4 +53,4 @@ class BookController {
 	}
 }
 
-module.exports = BookController;
+module.exports = CustomerController;
