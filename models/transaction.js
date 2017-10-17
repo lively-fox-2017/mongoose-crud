@@ -3,13 +3,13 @@ var Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost/library');
 // mongoose.Promise = global.Promise;
 var transactionSchema = new Schema({
-  member: { type: Schema.Types.ObjectId, ref: 'Customer' },
-  days: {type:Number},
-  out_date: {type:Date},
+  member: { type: Schema.Types.ObjectId, ref: 'Customer' , required: true},
+  days: {type:Number, required: true},
+  out_date: {type:Date, required: true},
   due_date: {type:Date},
   in_date: {type:Date},
   fine: {type:Number},
-  booklist:[{type: Schema.Types.ObjectId, ref: 'Book'}]
+  booklist:[{type: Schema.Types.ObjectId, ref: 'Book', required: true}]
 });
 
 transactionSchema.pre('save', function(next){

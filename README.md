@@ -14,24 +14,24 @@ List of book routes:
 
 List of customer routes:
 
-| Route                   | HTTP   | Description                                        |
+| Route                   | HTTP   | Description                                        | Required Param
 |-------------------------|--------|--------------------------------------|
-| `/api/customers`                  | GET    | Get all customers                          |
-| `/api/customers/:id`          | GET    | Get a customers                                    |
-| `/api/customers/`                 | POST   | Create a customers                                            |
-| `/api/customers/:id`          | DELETE | Delete a customers                                                |
-| `/api/customers/:id`          | PUT      | Update a customers with new info                    |
+| `/api/customers`                  | GET    | Get all customers                          | |
+| `/api/customers/:id`          | GET    | Get a customers                                    | |
+| `/api/customers/`                 | POST   | Create a customers                                            | name, memberid, address, zipcode, phone |
+| `/api/customers/:id`          | DELETE | Delete a customers                                                | |
+| `/api/customers/:id`          | PUT      | Update a customers with new info                    | | |
 *note _id as param*
 
 
 List of transaction routes:
 
-| Route                   | HTTP   | Description                                        |
+| Route                   | HTTP   | Description                                        |Required Param
 |-------------------------|--------|--------------------------------------|
-| `/api/transactions`                  | GET    | Get all transactions                          |
-| `/api/transactions/`                 | POST   | Create a transactions                                            |
-| `/api/transactions/:id`                 | GET   | Get a transactions                                            |
-| `/api/transactions/:id`                 | PUT   | Update transaction (return book) |
+| `/api/transactions`                  | GET    | Get all transactions                          | |
+| `/api/transactions/`                 | POST   | Create a transactions                                            | customerId, bookId(Array), days  |
+| `/api/transactions/:id`                 | GET   | Get a transactions                                            |  |
+| `/api/transactions/:id`                 | PUT   | Update transaction (return book)| | |
 *note _id as param*
 
 Access the website via `http://localhost:3000` or API via `http:localhost:3000/api`

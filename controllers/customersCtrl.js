@@ -35,13 +35,7 @@ class CustomerCtrl {
     })
   }
   static update(req, res, next){
-    model.Customer.findOneAndUpdate({"_id":req.params.id},{
-      name:req.body.name,
-      memberid:req.body.memberid,
-      address:req.body.address,
-      zipcode:req.body.zipcode,
-      phone:req.body.phone
-    }).then((data)=>{
+    model.Customer.findOneAndUpdate({"_id":req.params.id},req.body).then((data)=>{
       var obj = {
         message: 'Update Success',
         data:data
