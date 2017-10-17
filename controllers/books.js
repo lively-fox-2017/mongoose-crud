@@ -1,11 +1,15 @@
-var Books = require('../models/books');
+var Book = require('../models/books');
 
 
 class BookController{
   static getAll(req,res){
-    Books.getAll().then(result=>{
-        res.json(200,{msg:'book list', data:result})
+    Book.find({},(err,result)=>{
+      res.json(200,{msg:'book list', data:result})
+      // resolve(result)
     })
+    // Books.getAll().then(result=>{
+    //     res.json(200,{msg:'book list', data:result})
+    // })
   }
 
   static addNew(req,res){
@@ -16,12 +20,18 @@ class BookController{
       category: req.body.category,
       stock:req.body.stock
     }
-    Books.addNew(insert).then(result=>{
-        res.json(200,{msg:'new book', data:result})
+    Book.create(insert).then((result)=>{
+      res.json(200,{msg:'new book', data:result})
     })
+    // Books.addNew(insert).then(result=>{
+    //     res.json(200,{msg:'new book', data:result})
+    // })
   }
 
   static editData(req,res){
+    let condition={
+      _id : req.body.id
+    }
     let newData={
         $set:{
           isbn: req.body.isbn,
@@ -31,15 +41,24 @@ class BookController{
           stock: req.body.stock
         }
       }
-      Books.editData(req.body.id,newData).then(result=>{
+      Book.update(condition,newData).then(result=>{
         res.json(200,{msg:"edited id", data:result})
-        })
+      })
+      // Books.editData(req.body.id,newData).then(result=>{
+      //   res.json(200,{msg:"edited id", data:result})
+      //   })
       }
 
   static deleteData(req,res){
-      Books.deleteData(req.body.id).then(result=>{
-        res.json(200,{msg:"deleted id", data:result})
-        })
+    let condition={
+      _id : req.body.id
+    }
+    Book.findOneAndRemove(condition).then(result=>{
+      res.json(200,{msg:"deleted id", data:result})
+      })
+      // Books.deleteData(req.body.id).then(result=>{
+      //   res.json(200,{msg:"deleted id", data:result})
+      //   })
       }
 
 
