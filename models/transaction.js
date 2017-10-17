@@ -7,7 +7,8 @@ mongoose.connect(URL);
 var transactionSchema = new Schema({
   member: {
     type: Schema.Types.ObjectId,
-    ref: 'Customer'
+    ref: 'Customer',
+    required: true
   },
   days: {
     type: Number,
@@ -15,7 +16,7 @@ var transactionSchema = new Schema({
   },
   out_date: {
     type: Date,
-    required: true,
+    default: Date.now
   },
   due_date: {
     type: Date,
@@ -30,31 +31,43 @@ var transactionSchema = new Schema({
   }]
 });
 
-transactionSchema.pre('save', (next) => {
+transactionSchema.pre('save', function(next) {
+  this.out_date = Date.now();
   let out_date = new Date(this.out_date);
   out_date.setDate(out_date.getDate() + this.days);
-  this.due_date = Date(out_date);
+  this.due_date = out_date;
   next();
 })
 
-transactionSchema.pre('update', () => {
+transactionSchema.pre('update', function(next) {
+  this.out_date = Date.now();
   let out_date = new Date(this.out_date);
   out_date.setDate(out_date.getDate() + this.days);
   let due_date = Date(out_date);
+  let fine = 0;
+  if (this.in_date) {
+    fine = (this.in_date - this.due_date) * 3000;
+  }
   this.update({}, {
     $set: {
-      updatedAt: due_date
+      due_date: due_date,
+      fine: fine
     }
   });
+  next();
 });
 
 transactionSchema.pre('findOneAndUpdate', function() {
+  this.out_date = Date.now();
   let out_date = new Date(this.out_date);
   out_date.setDate(out_date.getDate() + this.days);
   let due_date = Date(out_date);
+  if (this.in_date) {
+    console.log('masuk');
+  }
   this.update({}, {
     $set: {
-      updatedAt: due_date
+      due_date: due_date
     }
   });
 });

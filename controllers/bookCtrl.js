@@ -2,7 +2,7 @@ const Book = require('../models/book');
 
 class BookCtrl {
   static getBooks(req, res) {
-    Book.find()
+    Book.find().exec()
       .then(books => {
         res.status(200).send(books);
       })
@@ -14,7 +14,7 @@ class BookCtrl {
   static getBook(req, res) {
     Book.findOne({
         isbn: req.params.isbn
-      })
+      }).exec()
       .then(book => {
         res.status(200).send(book);
       })
@@ -25,7 +25,7 @@ class BookCtrl {
 
   static createBook(req, res) {
     let newBook = new Book(req.body);
-    newBook.save()
+    newBook.save().exec()
       .then(value => {
         res.status(201).send(value);
       })

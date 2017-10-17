@@ -35,10 +35,10 @@ var bookSchema = new Schema({
   }
 });
 
-bookSchema.pre('update', () => {
+bookSchema.pre('update', function() {
   this.update({}, {
     $set: {
-      updatedAt: new Date()
+      updatedAt: Date.now()
     }
   });
 });

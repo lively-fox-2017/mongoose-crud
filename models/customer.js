@@ -35,10 +35,10 @@ var customerSchema = new Schema({
   }
 });
 
-customerSchema.pre('update', () => {
+customerSchema.pre('update', function() {
   this.update({}, {
     $set: {
-      updatedAt: new Date()
+      updatedAt: Date.now()
     }
   });
 });
