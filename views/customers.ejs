@@ -25,6 +25,8 @@
                 <td><%=d.address%></td>
                 <td><%=d.zipcode%></td>
                 <td><%=d.phone%></td>
+                <td><form action='/customers/delete/<%=d.id%>'><button type='submit'>Delete</button></form></td>
+                <td><a href='/customers/edit/<%=d.id%>'>Edit</a></td>
             </tr>
         <%})%>
     </table>
