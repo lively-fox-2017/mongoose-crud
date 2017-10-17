@@ -16,7 +16,7 @@ class bookController {
     }
 
     static post(req,res) {
-        book = new Book({
+        var book = new Book({
             isbn: req.body.isbn,
             title: req.body.title,
             author: req.body.author,

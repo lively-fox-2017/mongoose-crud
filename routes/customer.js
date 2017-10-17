@@ -6,6 +6,8 @@ var customerCtrl = require('../controllers/customer')
 
 router.get('/', customerCtrl.get);
 
+router.get('/add', customerCtrl.getAddPage)
+
 router.post('/', customerCtrl.post)
 
 router.put('/:id', customerCtrl.update)

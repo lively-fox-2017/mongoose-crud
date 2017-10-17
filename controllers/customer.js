@@ -1,22 +1,28 @@
 var Customer = require('../models/customer')
 
 class customerCtrl{
+
+    static getAddPage(req,res) {
+        res.render('addCustomer', {title: 'Add a customer'})
+    }
+
     static get(req,res) {
         Customer.find({})
         .then((customer,err) => {
           if(err) {
             res.send(err)
           }
-          res.send({
-              message: 'customer list has been loaded',
-              list: customer
-          })
+          res.render('customers', {title: 'Customers', customers: customer})
+        //   res.send({
+        //       message: 'customer list has been loaded',
+        //       list: customer
+        //   })
         })
     }
 
     static post(req,res) {
         if(req.body.name && req.body.memberid && req.body.address && req.body.zipcode && req.body.phone !== '') {
-            customer = new Customer({
+            var customer = new Customer({
                 name: req.body.name,
                 memberid: req.body.memberid,
                 address: req.body.address,
@@ -29,10 +35,12 @@ class customerCtrl{
                 if(err) {
                   res.send(err)
                 }
-                res.send({
-                    message: 'Customer has been added',
-                    added: result
-                })
+                console.log('halo')
+                res.redirect('/')
+                // res.send({
+                //     message: 'Customer has been added',
+                //     added: result
+                // })
               })
         }
     }

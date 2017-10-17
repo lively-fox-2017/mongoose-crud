@@ -9,16 +9,17 @@ class collectionCtrl{
           if(err) {
             res.send(err)
           }
-          res.send({
-              message: 'collection list has been loaded',
-              list: collection
-          })
+          res.render('transaction', {title: 'Transaction', transaction: collection})
+        //   res.send({
+        //       message: 'collection list has been loaded',
+        //       list: collection
+        //   })
         })
     }
 
     static post(req,res) {
         if(req.body.member && req.body.days && req.body.fine && req.body.booklist !== '') {
-            collection = new Collection({
+            var collection = new Collection({
                 member: req.body.member,
                 days: req.body.days,
                 // out_date: req.body.outDate,
