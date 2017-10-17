@@ -25,7 +25,7 @@ class CustomerController {
 	static create(req, res) {
 		models.Customer.create(req.body)
 		.then(created => {
-			res.status(200).send(created)
+			res.status(201).send(created)
 		})
 		.catch(err => {
 			res.status(500).send(err);

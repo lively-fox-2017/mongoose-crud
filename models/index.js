@@ -6,4 +6,4 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/library');
 mongoose.Promise = global.Promise;
 
-module.exports = {Book, Customer};
+module.exports = {Book, Customer, Transaction};
