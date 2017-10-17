@@ -26,13 +26,13 @@ List of customer routes:
 
 List of transaction routes:
 
-| Route                   | HTTP   | Description                                        |Required Param
-|-------------------------|--------|--------------------------------------|
-| `/api/transactions`                  | GET    | Get all transactions                          | |
-| `/api/transactions/`                 | POST   | Create a transactions                                            | customerId, bookId(Array), days  |
-| `/api/transactions/:id`                 | GET   | Get a transactions                                            |  |
-| `/api/transactions/:id`                 | PUT   | Update transaction (return book)| |
-| `/api/transactions/:id` | DELETE | -- | -- | 
+| Route                   | HTTP   | Description                          | Required Param                    |
+|-------------------------|--------|--------------------------------------|-----------------------------------|
+| `/api/transactions`     | GET    | Get all transactions                 |                                   |
+| `/api/transactions/`    | POST   | Create a transactions                | customerId, bookId(Array), days   |
+| `/api/transactions/:id` | GET    | Get a transactions                   |                                   |
+| `/api/transactions/:id` | PUT    | Update transaction (return book)     |                                   |
+| `/api/transactions/:id` | DELETE | Delete a transaction                 |                                   | 
 *note _id as param*
 
 Access the website via `http://localhost:3000` or API via `http:localhost:3000/api`
