@@ -6,6 +6,8 @@ class Book {
   }
   static findAll(req,res){
     modelBook.find({})
+    .populate('member')
+    .populate('booklist')
     .then(rows=>{
       // console.log(rows);
       res.send(rows)
