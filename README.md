@@ -20,7 +20,7 @@ List of customer routes:
 | `/api/customers/:id`          | GET    | Get a customers                                    | |
 | `/api/customers/`                 | POST   | Create a customers                                            | name, memberid, address, zipcode, phone |
 | `/api/customers/:id`          | DELETE | Delete a customers                                                | |
-| `/api/customers/:id`          | PUT      | Update a customers with new info                    | | 
+| `/api/customers/:id`          | PUT      | Update a customers with new info                    |-- |-- |
 *note _id as param*
 
 
@@ -32,7 +32,7 @@ List of transaction routes:
 | `/api/transactions/`                 | POST   | Create a transactions                                            | customerId, bookId(Array), days  |
 | `/api/transactions/:id`                 | GET   | Get a transactions                                            |  |
 | `/api/transactions/:id`                 | PUT   | Update transaction (return book)| |
-| `/api/transactions/:id` | DELETE | | 
+| `/api/transactions/:id` | DELETE | -- | -- | 
 *note _id as param*
 
 Access the website via `http://localhost:3000` or API via `http:localhost:3000/api`
