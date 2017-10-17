@@ -28,9 +28,8 @@ class TransactionController {
 		due.setDate(due.getDate() + Number(req.body.days));
 
 		let bookIds = Array.isArray(req.body.booklist) ? req.body.booklist : [req.body.booklist];
-
+		
 		// check member and books
-		const isObjEmpty = (obj) => Object.keys(obj).length === 0;
 		let iter = [];
 		iter.push(models.Customer.findById(req.body.member).exec());
 		bookIds.forEach(bookId => {
