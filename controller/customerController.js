@@ -3,7 +3,7 @@ const helper = require('../helper/helper')
 
 module.exports = {
   findAll: (req, res) => {
-    Customer.findAll().then((rowsCustomer) => {
+    Customer.find().sort('name').then((rowsCustomer) => {
       res.json({
         message: "Tampil Semua Data Customer",
         data: rowsCustomer
@@ -16,11 +16,17 @@ module.exports = {
   },
 
   findOne: (req, res) => {
-    Customer.findOne(req.params.id).then((rowCustomer) => {
-      res.json({
-        message: "Tampil Satu Data Customer",
-        data: rowCustomer
-      })
+    Customer.findOne({_id: req.params.id}).then((rowCustomer) => {
+      if (rowCustomer) {
+        res.json({
+          message: "Tampil Satu Data Customer",
+          data: rowCustomer
+        })
+      } else {
+        res.json({
+          message: "Maaf Id tersebut tidak ada"
+        })
+      }
     }).catch((reason) => {
       res.json({
         message: reason
@@ -29,9 +35,9 @@ module.exports = {
   },
 
   insert: (req, res) => {
-    Customer.insert(helper.dataCustomer(req.body)).then((rowCustomerInserted) => {
+    Customer(helper.dataCustomer(req.body)).save().then((rowCustomerInserted) => {
       res.json({
-        message: "Memasukan Data",
+        message: "Berhasil Memasukan Data",
         data: rowCustomerInserted
       })
     }).catch((reason) => {
@@ -42,11 +48,18 @@ module.exports = {
   },
 
   update: (req, res) => {
-    Customer.update(helper.dataCustomer(req.body), req.params.id).then((rowUpdateCustomer) => {
-      res.json({
-        message: "Update",
-        data: rowUpdateCustomer
-      })
+    Customer.update({_id: req.params.id}, {$set: helper.dataCustomer(req.body)}).then((rowUpdateCustomer) => {
+      // console.log(rowUpdateCustomer);
+      if (rowUpdateCustomer.n != 0) {
+        res.json({
+          message: "Berhasil Update",
+          data: rowUpdateCustomer
+        })
+      } else {
+        res.json({
+          message: "Data tidak ditemukan"
+        })
+      }
     }).catch((reason) => {
       res.json({
         message: reason
@@ -55,11 +68,17 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    Customer.delete(req.params.id).then((rowDeleteCustomer) => {
-      res.json({
-        message: "Deleted",
-        data: rowDeleteCustomer
-      })
+    Customer.remove({_id: req.params.id}).then((rowDeleteCustomer) => {
+      if (rowDeleteCustomer.result.n != 0) {
+        res.json({
+          message: "Berhasil Hapus",
+          data: rowDeleteCustomer
+        })
+      } else {
+        res.json({
+          message: "Maaf Id tersebut tidak ada"
+        })
+      }
     }).catch((reason) => {
       res.json({
         message: reason

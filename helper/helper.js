@@ -39,24 +39,25 @@ module.exports = {
       days: reqBody.days,
       out_date: new Date(),
       in_date: null,
+      fine: 0,
       booklist: reqBody.booklist
     }
+
     Obj.due_date = moment(new Date(Obj.out_date)).add(Obj.days, 'days')
 
-    if (reqBody.in_date && Obj.in_date === null){
-      Obj.in_date = new Date(reqBody.in_date)
-    }
-
-    let hariDenda = 0
-    let indateNum = moment(reqBody.in_date).format('YYYYMMD')
-    let duedateNum = moment(reqBody.due_date).format('YYYYMMD')
-
-    if (Obj.in_date) {
-      hariDenda = indateNum - duedateNum
-    }
-
-    Obj.fine = hariDenda * 1000
-
     return Obj
+  },
+
+  countFine: (in_date, due_date) => {
+    let fine = 0
+    let indateNum = moment(in_date).format('YYYYMMD')
+    let duedateNum = moment(due_date).format('YYYYMMD')
+    let hariDenda = indateNum - duedateNum
+
+    if (hariDenda > 0) {
+      fine = hariDenda * 1000
+    }
+
+    return fine
   }
 }
