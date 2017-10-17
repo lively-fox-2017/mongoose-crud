@@ -62,6 +62,18 @@ class TransactionCtrl {
       res.send(err);
     })
   }
+  static destroy(req, res, next) {
+    model.Transaction.findOneAndRemove({"_id":req.params.id}).then((data)=>{
+      var obj = {
+        message: 'Delete Success',
+        data:data
+      }
+      res.send(obj);
+    }).catch((err)=>{
+      console.log(err);
+      res.send(err)
+    })
+  }
 }
 
 module.exports = TransactionCtrl;

@@ -31,7 +31,8 @@ List of transaction routes:
 | `/api/transactions`                  | GET    | Get all transactions                          | |
 | `/api/transactions/`                 | POST   | Create a transactions                                            | customerId, bookId(Array), days  |
 | `/api/transactions/:id`                 | GET   | Get a transactions                                            |  |
-| `/api/transactions/:id`                 | PUT   | Update transaction (return book)| | |
+| `/api/transactions/:id`                 | PUT   | Update transaction (return book)| |
+| `/api/transactions/:id` | DELETE | | | |
 *note _id as param*
 
 Access the website via `http://localhost:3000` or API via `http:localhost:3000/api`

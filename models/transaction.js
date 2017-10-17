@@ -1,3 +1,4 @@
+var idvalidator = require('mongoose-id-validator');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost/library');
@@ -34,6 +35,8 @@ transactionSchema.pre('findOneAndUpdate', function(next){
     })
   })
 })
+
+transactionSchema.plugin(idvalidator)
 
 var Transaction = mongoose.model('Transaction', transactionSchema);
 
