@@ -18,5 +18,17 @@ module.exports = {
     }
 
     return Obj
+  },
+
+  dataCustomer: (reqBody) => {
+    let Obj = {
+      name: reqBody.name,
+      memberid: reqBody.memberid,
+      address: reqBody.address,
+      zipcode: reqBody.zipcode,
+      phone: reqBody.phone
+    }
+
+    return Obj
   }
 }
