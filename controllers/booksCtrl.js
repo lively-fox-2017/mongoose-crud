@@ -2,6 +2,7 @@ const model = require('../models/index');
 
 class BookCtrl {
   static read(req, res, next) {
+    console.log(model.Book);
     model.Book.find().then((data)=>{
       res.send(data);
     }).catch((err)=>{
