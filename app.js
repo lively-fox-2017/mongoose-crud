@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var book = require('./routes/book')
 var customer = require('./routes/customer')
+var transaction = require('./routes/transaction')
 
 var app = express();
 mongoose.connect('mongodb://localhost/belajarMongooseCrud', (err) => {
@@ -36,6 +37,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/book', book)
 app.use('/customer', customer)
+app.use('/transaction', transaction)
 
 
 
