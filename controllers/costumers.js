@@ -40,7 +40,7 @@ class Costumer{
   static deleteByMemberId(req, res){
     let memberid = req.params.memberid;
     Models.Customer.findOne({memberid}, function(err, iresult){
-      if(err || iresult.length==0){
+      if(err || !iresult){
         let result={
           message:'Bad request',
           data:{err}
