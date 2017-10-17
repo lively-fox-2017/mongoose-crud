@@ -5,8 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/library2');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
+var book = require('./routes/book')
+var costumer= require('./routes/costumer')
+var transaction= require('./routes/transaction')
 
 var app = express();
 
@@ -25,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/',book)
+app.use('/',costumer)
+app.use('/',transaction)
 
 module.exports = app;
