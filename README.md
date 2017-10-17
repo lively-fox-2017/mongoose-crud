@@ -1,2 +1,2 @@
 # mongoose-crud
-selasa pagi, gunakan npm 'mongoose'
+selasa siang, gunakan npm 'mongoose'
