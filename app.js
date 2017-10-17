@@ -11,6 +11,7 @@ var users = require('./routes/users');
 
 const books = require('./routes/books')
 const people = require('./routes/customers')
+const transaction = require('./routes/transactions')
 
 var app = express();
 mongoose.connect('mongodb://localhost/libraryMongoose', (err) => {
@@ -38,6 +39,7 @@ app.use('/users', users);
 
 app.use('/books', books)
 app.use('/customers', people)
+app.use('/transactions', transaction)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
