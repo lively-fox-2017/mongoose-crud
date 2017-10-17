@@ -40,36 +40,57 @@ transactionSchema.pre('save', function(next) {
 })
 
 transactionSchema.pre('update', function(next) {
-  this.out_date = Date.now();
-  let out_date = new Date(this.out_date);
-  out_date.setDate(out_date.getDate() + this.days);
-  let due_date = Date(out_date);
-  let fine = 0;
-  if (this.in_date) {
-    fine = (this.in_date - this.due_date) * 3000;
-  }
-  this.update({}, {
-    $set: {
-      due_date: due_date,
-      fine: fine
-    }
-  });
-  next();
+  this.findOne({
+      _id: this._conditions._id
+    })
+    .then(value => {
+      var diff = new Date(this._update['$set'].in_date).getTime() - value.due_date.getTime();
+      if (diff >= 0) {
+        // ms to days
+        diff = Math.floor(diff / (1000 * 3600 * 24));
+      }
+      this.updateOne({
+          _id: this._conditions._id
+        }, {
+          fine: diff * 1000
+        })
+        .then(() => {
+          next();
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
+    })
+    .catch(reason => {
+      console.log(reason);
+    })
 });
 
-transactionSchema.pre('findOneAndUpdate', function() {
-  this.out_date = Date.now();
-  let out_date = new Date(this.out_date);
-  out_date.setDate(out_date.getDate() + this.days);
-  let due_date = Date(out_date);
-  if (this.in_date) {
-    console.log('masuk');
-  }
-  this.update({}, {
-    $set: {
-      due_date: due_date
-    }
-  });
+transactionSchema.pre('findOneAndUpdate', function(next) {
+  this.findOne({
+      _id: this._conditions._id
+    })
+    .then(value => {
+      var diff = new Date(this._update.in_date).getTime() - value.due_date.getTime();
+      if (diff >= 0) {
+        // ms to days
+        diff = Math.ceil(diff / (1000 * 3600 * 24));
+      }
+      this.update({
+          _id: this._conditions._id
+        }, {
+          fine: diff * 1000
+        })
+        .then(() => {
+          next();
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
+    })
+    .catch(reason => {
+      console.log(reason);
+    })
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);

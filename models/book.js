@@ -23,6 +23,7 @@ var bookSchema = new Schema({
   },
   'stock': {
     type: Number,
+    min: [0, 'Stock minimum is 0'],
     default: 0
   },
   'createdAt': {

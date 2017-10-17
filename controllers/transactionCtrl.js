@@ -52,7 +52,7 @@ class TransactionCtrl {
   }
 
   static updateTransaction(req, res) {
-    Transaction.updateOne({
+    Transaction.update({
         _id: new ObjectId(req.params.transactionId)
       }, req.body)
       .then(value => {

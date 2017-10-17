@@ -22,8 +22,8 @@ var customerSchema = new Schema({
   },
   'phone': {
     type: String,
-    minlength: [11, 'The value of path `{PATH}` (`{VALUE}`) is shorter than the minimum allowed length ({MINLENGTH}).'],
-    maxlength: [12, 'The value of path `{PATH}` (`{VALUE}`) is higher than the maximum allowed length ({MAXLENGTH}).'],
+    minlength: [10, 'The value of path `{PATH}` (`{VALUE}`) is shorter than the minimum allowed length ({MINLENGTH}).'],
+    maxlength: [13, 'The value of path `{PATH}` (`{VALUE}`) is higher than the maximum allowed length ({MAXLENGTH}).'],
   },
   'createdAt': {
     type: Date,
