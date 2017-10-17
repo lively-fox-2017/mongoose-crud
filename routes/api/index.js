@@ -3,12 +3,16 @@ const router = express.Router();
 
 const books = require('./books');
 const customers = require('./customers');
+const transactions = require('./transactions');
 
 // /books
 router.use('/books', books);
 
 // /customers
 router.use('/customers', customers);
+
+// /transactions
+router.use('/transactions', transactions);
 
 // GET /api
 router.get('/', (req, res) => {
