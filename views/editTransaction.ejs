@@ -36,6 +36,7 @@
             </tr>
     </table>
     <form action='/collections' method='post'>
+        <input type="hidden" name="_method" value="PUT">        
         <select name='member'>
             <%members.forEach(m => {%>
                 <option value='<%=m.id%>'><%=m.name%></option>
