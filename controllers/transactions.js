@@ -93,6 +93,21 @@ class Transaction{
       res.status(500).json({message:'internal server error', data:{err:err}})
     })
   }
+
+  static updateTransaction(req, res){
+    Models.Transaction.findOne({_id:mongodb.ObjectId(req.params.id)}).then((transaction)=>{
+      if(transaction){
+        transaction.member= mongodb.ObjectId(req.params.member)
+        transaction.isbn=req.body.isbn;
+        transaction.save()
+        res.status(200).json({message:"Edited", data:{}})
+      }else{
+        res.status(400).json({message:'Bad request', data:{}})
+      }
+    }).catch((err)=>{
+      res.status(500).json({message:'internal server error', data:{err:err}})
+    })
+  }
 }
 
 module.exports = Transaction;
